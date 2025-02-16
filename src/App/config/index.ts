@@ -7,5 +7,7 @@ export default {
  
   port: process.env.port,
   database_url: process.env.MONGO_URI,
+  jwt_secret: process.env.JWT_SECRET,
+  jwt_expiration: process.env.JWT_EXPIRATION,
   
 };
