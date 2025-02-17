@@ -1,5 +1,5 @@
-import config from "../../../config";
-import { User } from "../user.model";
+import config from "../../config";
+import { User } from "../user/user.model";
 import { iloginUser } from "./auth.interface";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -16,7 +16,7 @@ import _ from 'lodash'
     }
     const token = jwt.sign({id : userExist._id, role:userExist.role}, config.jwt_secret as string, {expiresIn: '10d'})  
     
-    const user = _.omit(userExist.toObject(), ['password']);
+    const { password, ...user } = userExist.toObject();
 
     return {token, user  }
 }

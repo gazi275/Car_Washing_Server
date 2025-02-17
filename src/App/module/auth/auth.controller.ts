@@ -1,6 +1,6 @@
 
-import catchAsync from "../../../../utilis/catchAsync";
-import sendResponse from "../../../../utilis/sendResponse";
+import catchAsync from "../../../utilis/catchAsync";
+import sendResponse from "../../../utilis/sendResponse";
 import { userLoginService } from "./auth.services";
 import { loginUserValidationSchema } from "./auth.validation";
 
