@@ -30,7 +30,20 @@ const createSlot = catchAsync(async (req: Request, res: Response) =>{
   } 
  )
 
+ const getAllSlots = catchAsync(async (req: Request, res: Response) => {
+    const {date,serviceId}=req.query
+    const result = await SlotService.getAllSlots(date as string,serviceId as string)
+ 
+    sendResponse(res,
+        {success:true,
+        data:result,
+        status:200,
+        message:'All slots fetched successfully'})
+  })
+
     
 
 export const SlotController = {
-  createSlot};
+  createSlot
+,getAllSlots
+} ;

@@ -1,3 +1,4 @@
+import { get } from "lodash";
 import { TSlot } from "./slot.interface";
 import { SlotModel } from "./slot.model";
 
@@ -37,6 +38,20 @@ const createSlot = async (slot:TSlot) => {
     return createdSlots;
 }
 
-export const SlotService = {
-    createSlot
+const getAllSlots = async (date:string,serviceId:string) => {
+  const query:any = {};
+  if (date) {
+    query['date'] = date;}
+  if (serviceId) {
+    query['service'] = serviceId;}
+
+    const slots = await SlotModel.find(query).populate('service')
+    
+    
+    return slots;
 }
+
+export const SlotService = {
+    createSlot,
+    getAllSlots 
+} 

@@ -4,4 +4,5 @@ import { SlotController } from "./slot.controller";
 
 const router = Router();
 router.post('/services/slots',auth, SlotController.createSlot);
+router.get('/services/slots/availability', SlotController.getAllSlots);
 export const slot = router;
