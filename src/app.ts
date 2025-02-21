@@ -4,6 +4,7 @@ import { user } from './App/module/user/user.route';
 import { userLogin } from './App/module/auth/auth.route';
 import { services } from './App/module/Services/service.route';
 import { slot } from './App/module/Slot/slot.route';
+import { booking } from './App/module/Booking/booking.route';
 
 // Adjust the path as necessary
 
@@ -15,6 +16,7 @@ app.use('/api', user);
 app.use('/api', userLogin);
 app.use('/api', services);
 app.use('/api', slot);
+app.use('/api', booking);
 
 app.get('/', (req:Request, res:Response) => {
   res.send('Hello World!');
