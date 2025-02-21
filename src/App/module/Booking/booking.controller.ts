@@ -5,17 +5,24 @@ import { bookingValidationSchema } from "./booking.validation";
 import { BookingService } from "./booking.services";
 import sendResponse from "../../../utilis/sendResponse";
 
-const createBooking = catchAsync(async (req, res) => {
+import { AuthenticatedRequest } from "../../../mildleware/authenticaterequest";
+import { Types } from "mongoose";
+
+const createBooking = catchAsync(async (req:AuthenticatedRequest, res) => {
     const bookingData = req.body;
+    const customer = req.user?.id;
+    if (!customer) {
+        throw new Error('Unauthorized');
+    }
    
    
     const parsedData = bookingValidationSchema.parse(bookingData);
     
     const completeData = {
         ...parsedData,
-        customer: req.body.customer,
-        serviceId: req.body.serviceId,
-        slotId: req.body.slotId
+        customer: new Types.ObjectId(customer),
+        serviceId: new Types.ObjectId(parsedData.serviceId),
+        slotId: new Types.ObjectId(parsedData.slotId)
     };
     
     const result = await BookingService.bookingservice(completeData);

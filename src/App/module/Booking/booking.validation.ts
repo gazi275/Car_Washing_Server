@@ -1,7 +1,7 @@
 import { custom, z } from 'zod';
 
 export const bookingValidationSchema = z.object({
-  customer: z.string({ required_error: 'Customer ID is required' }),
+ 
   serviceId: z.string({ required_error: 'Service ID is required' }),
   slotId: z.string({ required_error: 'Slot ID is required' }),
   vehicleType: z.enum([
