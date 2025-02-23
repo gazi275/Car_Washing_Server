@@ -1,5 +1,6 @@
 import { Tbooking } from "./booking.interface";
 import { BookingModel } from "./booking.schema";
+import { get } from 'lodash';
 
 const bookingservice = async (booking: Tbooking) => {
     const existingBooking = await BookingModel.findOne({
@@ -27,8 +28,17 @@ const getBooking = async ()=>{
     ]);
     return result;
 }
+const getUserBooking = async (userId: string) => {
+    const result = await BookingModel.find({ customer: userId }).populate([
+        { path: 'customer', select: '-password' }, // ✅ Exclude password field
+        { path: 'serviceId' },
+        { path: 'slotId' }
+    ]);
+    return result;
+}
 
 export const BookingService = {
     bookingservice,
-    getBooking
+    getBooking,
+    getUserBooking
 } ;

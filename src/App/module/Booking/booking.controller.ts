@@ -45,10 +45,18 @@ const getBookingController = catchAsync(async (req, res) => {
 }
 );
 
-const getUserBookingController = catchAsync(async (req, res) => {
+const getUserBookingController = catchAsync(async (req: AuthenticatedRequest, res) => {
+    const userId = req.user?.id;
+    if (!userId) {
+        throw new Error('Unauthorized');
+    }
+    const result = await BookingService.getUserBooking(userId);
+    sendResponse(res, { success: true, data: result, status: 200, message: 'User booking fetched successfully' });
     
 });
 
 export const bookingController = {
     createBooking ,
-    getBookingController};
+    getBookingController
+,getUserBookingController
+} ;
