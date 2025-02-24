@@ -10,5 +10,7 @@ export default {
   jwt_secret: process.env.JWT_SECRET,
   jwt_expiration: process.env.JWT_EXPIRATION,
   NODE_ENV: process.env.NODE_ENV,
+  stripe_secret: process.env.secret_key,
+  stripe_publisable: process.env.publishable_key,
   
 };
